@@ -15,5 +15,5 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 1.8
-      - name: Gradle Build
-        run: gradle build
+      - name: Gradle Publish
+        run: gradle -Pversion=1.2.4 publish
