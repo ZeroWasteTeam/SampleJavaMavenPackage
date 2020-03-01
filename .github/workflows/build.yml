@@ -16,4 +16,8 @@ jobs:
         with:
           java-version: 1.8
       - name: Gradle Publish
-        run: gradle -Pversion=1.2.4 publish
+        run: |
+          gradle build
+          gradle -Pgpr.user=nachiappannk -Pgpr.key=${{ secrets.GITHUB_TOKEN }} publishAppupdaterPluginPublicationToGitHubPackagesRepository
+        
+        gradle -Pversion=1.2.4 publish
