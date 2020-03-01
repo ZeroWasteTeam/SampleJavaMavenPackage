@@ -18,4 +18,4 @@ jobs:
       - name: Gradle Publish
         run: |
           gradle build
-          gradle -Pgpr.user=nachiappannk -Pgpr.key=${{ secrets.GITHUB_TOKEN }} publishAppupdaterPluginPublicationToGitHubPackagesRepository
+          gradle -Pgpr.user=nachiappannk -Pgpr.key=${{ secrets.GITHUB_TOKEN }} publish
