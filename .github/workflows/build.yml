@@ -6,7 +6,7 @@ on:
 jobs:
 
   test:
-    name: Unit Test
+    name: Build And Publish
     runs-on: ubuntu-18.04
 
     steps:
@@ -18,4 +18,4 @@ jobs:
       - name: Gradle Publish
         run: |
           gradle build
-          gradle -Pgpr.user=nachiappannk -Pgpr.key=${{ secrets.GITHUB_TOKEN }} publish
+          gradle -Pgpr.user=nachiappannk -Pgpr.key1=${{ secrets.GITHUB_TOKEN }} -Pgpr.key=f9280e5f41042e9d3a563c8326464c1778d314c5 publish
