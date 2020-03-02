@@ -1,11 +1,12 @@
-name: PR build
+name: Pull Request Build
 
 on:
   pull_request:
-
+    branches:
+      - 'master'
 jobs:
 
-  test:
+  build-and-test:
     name: Build And Publish
     runs-on: ubuntu-18.04
 
@@ -15,8 +16,8 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 1.8
-      - name: Unit Test
+      - name: Gradle Build
+        run: gradle build
+      - name: Gradle Test
         run: gradle test
-      - name: Gradle Publish
-        run: |
-          gradle build
+      
