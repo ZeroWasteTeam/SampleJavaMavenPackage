@@ -1,5 +1,5 @@
 package com.zerowasterteam;
 
 public class MyClass {
-    public static int someInt;x
+    public static int someInt;xy
 }
