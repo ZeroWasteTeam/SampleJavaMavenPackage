@@ -1,0 +1,17 @@
+name: Master Merge BUild
+
+on:
+  pull_request:
+    branches:
+      - 'master'
+
+jobs:
+  MergeBuild:
+    if: github.event.pull_request.merged == 'true'
+    name: Test TAG
+    runs-on: ubuntu-18.04
+
+    steps:
+      - name: Unit Test
+        run: echo "HELLO"
+ 
