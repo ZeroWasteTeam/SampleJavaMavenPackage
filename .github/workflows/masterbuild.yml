@@ -2,6 +2,10 @@ name: Merge To Master Build
 
 on:
   push:
+    branches:
+      - 'master'
+    tags:
+      - 'test*'
 
 jobs:
   test:
