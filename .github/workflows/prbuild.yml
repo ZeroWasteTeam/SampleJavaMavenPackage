@@ -7,7 +7,7 @@ on:
 jobs:
 
   build-and-test:
-    name: PR - Build And Publish
+    name: PR - Build and Test
     runs-on: ubuntu-18.04
 
     steps:
