@@ -1,7 +1,7 @@
 name: Merge To Master Build
 
 on:
-  pull:
+  push:
 
 jobs:
   test:
