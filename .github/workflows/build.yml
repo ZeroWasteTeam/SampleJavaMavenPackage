@@ -2,7 +2,10 @@ name: Maven Package Build
 
 on:
   push:
-
+    branches:
+      - 'master'
+    tags:
+      - 'test*'
 jobs:
 
   test:
