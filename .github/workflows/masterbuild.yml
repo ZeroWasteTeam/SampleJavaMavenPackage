@@ -1,0 +1,15 @@
+name: Maven Package Build
+
+on:
+  create:
+
+jobs:
+
+  test:
+    name: Test TAG
+    runs-on: ubuntu-18.04
+
+    steps:
+      - name: Unit Test
+        run: echo "HELLO"
+ 
