@@ -1,10 +1,13 @@
-name: Create Test Build
+name: Merge To Master Build
 
 on:
-  create:
+  pull:
+    branches:
+      - 'master'
+
+
 
 jobs:
-
   test:
     name: Test TAG
     runs-on: ubuntu-18.04
