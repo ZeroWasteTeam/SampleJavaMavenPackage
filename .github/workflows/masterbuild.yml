@@ -2,10 +2,6 @@ name: Merge To Master Build
 
 on:
   pull:
-    branches:
-      - 'master'
-
-
 
 jobs:
   test:
@@ -15,4 +11,9 @@ jobs:
     steps:
       - name: Unit Test
         run: echo "HELLO"
+        
+    steps:
+      - run: echo ${{github.ref}}
+        name: Print Ref
+
  
