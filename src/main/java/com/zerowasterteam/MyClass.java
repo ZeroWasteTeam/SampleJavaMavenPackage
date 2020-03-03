@@ -4,7 +4,7 @@ public class MyClass {
 
     public static int someInt;
     public int x;
-    public int y;
+    public int y;sss
 
     
 }
