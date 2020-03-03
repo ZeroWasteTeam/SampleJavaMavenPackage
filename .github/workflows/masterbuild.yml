@@ -1,4 +1,4 @@
-name: Maven Package Build
+name: Create Test Build
 
 on:
   create:
