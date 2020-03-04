@@ -5,7 +5,8 @@ on:
     branches:
       - 'master'
     tags:
-      - 'test*'
+      - 'release'
+
 jobs:
 
   test:
