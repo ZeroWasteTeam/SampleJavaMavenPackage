@@ -28,7 +28,7 @@ jobs:
       - name: Extract branch name
         run: echo "${GITHUB_REF#refs/heads/}"
         
-      - name: GetVersion
+      - name: Print Version
         run: |
           ls
           pwd
