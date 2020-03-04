@@ -27,5 +27,11 @@ jobs:
 
       - name: Extract branch name
         run: echo "${GITHUB_REF#refs/heads/}"
+        
+      - name: GetVersion
+        run: |
+          version=$(./myBash.sh)
+          echo $version
+
 
 
