@@ -22,10 +22,12 @@ jobs:
           java-version: 1.8
           
       - name: Print Version
+        id: compute_version
         run: |
           chmod +x myBash.sh
           version=$(./myBash.sh)
           echo $version
+          echo "##[set-output name=version;]$(version)"
 
       - name: Unit Test
         run: gradle test
@@ -33,4 +35,4 @@ jobs:
       - name: Gradle Publish
         run: |
           gradle build
-          gradle -Pgpr.user=nachiappannk -Pgpr.key=${{ secrets.GITHUB_TOKEN }} publish
+          gradle -Pgpr.user=nachiappannk -Pgpr.key=${{ secrets.GITHUB_TOKEN }} -Pgpr.version=${{ steps.compute_version.outputs.version }} publish
