@@ -21,8 +21,7 @@ jobs:
           
       - name: Print Version
         run: |
-          ls
-          pwd
+          chmod +x myBash.sh
           version=$(./myBash.sh)
           echo $version
 
