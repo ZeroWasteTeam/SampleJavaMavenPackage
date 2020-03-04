@@ -1,5 +1,6 @@
 #!/bin/bash
 
+
 baseVersion=$(head -n 1 version.txt)
 baseVersion=`echo $baseVersion | sed 's/\\r//g'`
 [[ $baseVersion =~ ^[0-9]+\.[0-9]+$ ]] || (echo "The pattern <number(s)>.<number(s)> is not met" && exit 1)
