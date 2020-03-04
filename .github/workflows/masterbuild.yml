@@ -30,6 +30,8 @@ jobs:
         
       - name: GetVersion
         run: |
+          ls
+          pwd
           version=$(./myBash.sh)
           echo $version
 
