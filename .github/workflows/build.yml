@@ -27,7 +27,7 @@ jobs:
           chmod +x myBash.sh
           version=$(./myBash.sh)
           echo $version
-          echo "##[set-output name=version;]$(version)"
+          echo "##[set-output name=version;]$(echo $version)"
 
       - name: Unit Test
         run: gradle test
