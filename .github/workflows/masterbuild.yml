@@ -14,8 +14,10 @@ jobs:
 
     steps:
       - name: Unit Test
-        run: echo "HELLO"
+        if: github.ref == 'refs/heads/master'
+        run: echo "It's the master branch"
 
       - run: echo ${{github.ref}}
         name: Print Ref
+        if: startsWith(github.ref, 'refs/tags/test')
  
