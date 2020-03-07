@@ -1,5 +1,6 @@
 #!/bin/bash
 
+echo $1
 
 baseVersion=$(head -n 1 version.txt)
 baseVersion=`echo $baseVersion | sed 's/\\r//g'`
