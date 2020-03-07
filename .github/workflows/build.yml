@@ -27,9 +27,14 @@ jobs:
           echo $version
           echo "##[set-output name=version;]$(echo $version)"
 
-      - name: Github reference
+      - name: Github reference branch
         run: |
           echo ${GITHUB_REF#refs/heads/}
+          
+          
+      - name: Github reference tags
+        run: |
+          echo ${GITHUB_REF#refs/tags/}
 
       - name: Reference
         run: |
