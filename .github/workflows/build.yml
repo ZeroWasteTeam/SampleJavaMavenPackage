@@ -27,9 +27,19 @@ jobs:
           echo $version
           echo "##[set-output name=version;]$(echo $version)"
 
-      - name: Current Branch
+      - name: Github reference
+        run: |
+          ver=${{ github.event.ref }}
+          echo $ver
+
+      - name: Reference
         run: |
           ver=$(git rev-parse --abbrev-ref HEAD)
+          echo $ver
+
+      - name: github object
+        run: |
+          ver=${{ toJSON(github) }}
           echo $ver
 
       - name: Gradle Build
