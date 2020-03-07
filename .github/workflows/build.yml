@@ -1,9 +1,11 @@
-name: Maven Package Build
+name: Maven Release Package Build
 
 on:
   push:
     branches:
       - 'master'
+    tags:
+      - 'release*'
 jobs:
   build-test-publish:
     name: Build And Publish
