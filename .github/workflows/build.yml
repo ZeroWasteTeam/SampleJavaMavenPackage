@@ -26,7 +26,11 @@ jobs:
           version=$(./myBash.sh)
           echo $version
           echo "##[set-output name=version;]$(echo $version)"
-          
+
+      - name: Current Branch
+        run: |
+          ver=$(git rev-parse --abbrev-ref HEAD)
+          echo $ver
 
       - name: Gradle Build
         run: gradle build
