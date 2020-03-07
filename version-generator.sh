@@ -8,7 +8,7 @@ gitSha=$(git log -n1 --format=format:"%H")
 [[ $baseVersion =~ ^0[0-9]+\. ]] && (echo "The major version can not be prefixed with 0" && exit 1)
 [[ $baseVersion =~ \.0[0-9]+ ]] && (echo "The minor version can not be prefixed with 0" && exit 1)
 
-isMasterCommit=$(git log master | grep $(git log -n1 --format=format:"%H"))
+isMasterCommit=$(git log origin/master | grep $(git log -n1 --format=format:"%H"))
 
 
 if  [[ $1 == real-release ]] || [[ "$isMasterCommit" =~ [A-Za-z0-9] ]] ;
