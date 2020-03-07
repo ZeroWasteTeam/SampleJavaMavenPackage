@@ -29,8 +29,7 @@ jobs:
 
       - name: Github reference
         run: |
-          ver=${{ github.event.ref }}
-          echo $ver
+          echo ${GITHUB_REF#refs/heads/}
 
       - name: Reference
         run: |
