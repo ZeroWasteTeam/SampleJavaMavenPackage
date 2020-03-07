@@ -4,15 +4,11 @@ on:
   push:
     branches:
       - 'master'
-    tags:
-      - 'release'
-
 jobs:
-
-  test:
+  build-test-publish:
     name: Build And Publish
     runs-on: ubuntu-18.04
-
+    
     steps:
       - uses: actions/checkout@v1
 
@@ -28,11 +24,13 @@ jobs:
           version=$(./myBash.sh)
           echo $version
           echo "##[set-output name=version;]$(echo $version)"
+          
 
+      - name: Gradle Build
+        run: gradle build
+          
       - name: Unit Test
         run: gradle test
 
       - name: Gradle Publish
-        run: |
-          gradle build
-          gradle -Pgpr.user=nachiappannk -Pgpr.key=${{ secrets.GITHUB_TOKEN }} -Pgpr.version=${{ steps.compute_version.outputs.version }} publish
+        run: gradle -Pgpr.user=nachiappannk -Pgpr.key=${{ secrets.GITHUB_TOKEN }} -Pgpr.version=${{ steps.compute_version.outputs.version }} publish
