@@ -38,9 +38,6 @@ jobs:
           ver=${{ toJSON(github) }}
           echo $ver
 
-
-toJSON
-
       - name: Gradle Build
         run: gradle build
           
