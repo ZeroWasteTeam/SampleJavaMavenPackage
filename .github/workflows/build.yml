@@ -37,11 +37,17 @@ jobs:
           echo ${GITHUB_REF#refs/tags/}
 
       - name: TESSSS
+        id: compute-version
         run: |
+          chmod +x myBash.sh
           if  [[ ${GITHUB_REF#refs/tags/} == release* ]] ;
           then
-            echo yes this is a release
+            version=$(./myBash.sh hello)
+          else  
+            version=$(./myBash.sh hi)
           fi
+          echo $version
+          echo "##[set-output name=version;]$(echo $version)"
 
 
       - name: Reference
