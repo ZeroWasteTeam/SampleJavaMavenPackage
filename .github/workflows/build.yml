@@ -4,11 +4,8 @@ on:
   push:
     branches:
       - 'master'
-
-  create:
     tags:
-      - release*
-
+      - 'release*'
 jobs:
   build-test-publish:
     name: Build Test Publish
