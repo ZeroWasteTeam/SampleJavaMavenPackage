@@ -19,46 +19,18 @@ jobs:
         with:
           java-version: 1.8
           
-      - name: Print Version
+      - name: Compute Version
         id: compute_version
         run: |
-          chmod +x myBash.sh
-          version=$(./myBash.sh)
-          echo $version
-          echo "##[set-output name=version;]$(echo $version)"
-
-      - name: Github reference branch
-        run: |
-          echo ${GITHUB_REF#refs/heads/}
-          
-          
-      - name: Github reference tags
-        run: |
-          echo ${GITHUB_REF#refs/tags/}
-
-      - name: TESSSS
-        id: compute-version
-        run: |
-          chmod +x myBash.sh
+          chmod +x version-generator.sh
           if  [[ ${GITHUB_REF#refs/tags/} == release* ]] ;
           then
-            version=$(./myBash.sh temp-release)
+            version=$(./version-generator.sh temp-release)
           else  
-            version=$(./myBash.sh real-release)
+            version=$(./version-generator.sh real-release)
           fi
           echo $version
           echo "##[set-output name=version;]$(echo $version)"
-
-
-      - name: Reference
-        run: |
-          ver=$(git rev-parse --abbrev-ref HEAD)
-          echo $ver
-
-      - name: github object
-        run: |
-          ver=${{ toJSON(github) }}
-          echo $ver
 
       - name: Gradle Build
         run: gradle build
