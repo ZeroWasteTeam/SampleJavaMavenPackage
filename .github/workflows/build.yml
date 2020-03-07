@@ -36,6 +36,14 @@ jobs:
         run: |
           echo ${GITHUB_REF#refs/tags/}
 
+      - name: TESSSS
+        run: |
+          if  [[ ${GITHUB_REF#refs/tags/} == release* ]] ;
+          then
+            echo yes this is a release
+          fi
+
+
       - name: Reference
         run: |
           ver=$(git rev-parse --abbrev-ref HEAD)
