@@ -8,7 +8,7 @@ on:
       - 'release*'
 jobs:
   build-test-publish:
-    name: Build And Publish
+    name: Build Test Publish
     runs-on: ubuntu-18.04
     
     steps:
