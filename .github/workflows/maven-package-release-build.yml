@@ -1,4 +1,4 @@
-name: Maven Release Package Build
+name: Maven Package Release Build
 
 on:
   push:
