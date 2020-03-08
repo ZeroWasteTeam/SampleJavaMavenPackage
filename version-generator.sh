@@ -10,7 +10,6 @@ gitSha=$(git rev-parse --short=7 $(git log -n1 --format=format:%H))
 
 isMasterCommit=$(git log origin/master | grep $(git log -n1 --format=format:"%H"))
 
-
 if  [[ $1 == real-release ]] || [[ "$isMasterCommit" =~ [A-Za-z0-9] ]] ;
 then
   buildVersion=$(git rev-list $(git log  -n 1 --format=format:%H version.txt)..HEAD --count)
