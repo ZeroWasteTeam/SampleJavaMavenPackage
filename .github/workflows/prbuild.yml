@@ -25,7 +25,11 @@ jobs:
         run: echo $GITHUB_SHA
 
       - name: Git Modified Files
-        run: git diff --name-only "origin/master..$GITHUB_SHA"
+        run: |
+          numberOfFilesModifies = $(git diff --name-only "origin/master..$GITHUB_SHA" | wc -l)
+          echo $(numberOfFilesModifies)
+          isVersionFileModified = [[ $(git diff --name-only "origin/master..$GITHUB_SHA" | grep version.txt | wc -l) == 1 ]]
+          echo $isVersionFileModified
         
       - name: PR - Gradle Build
         run: gradle build
