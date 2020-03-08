@@ -26,6 +26,7 @@ jobs:
 
       - name: Git Modified Files
         run: |
+          echo "Checking Version File is Modified"
           number-of-files-modifies=$(git diff --name-only "origin/master..$GITHUB_SHA" | wc -l)
           echo $(number-of-files-modifies)
           is-version-file-modified=[[ $(git diff --name-only "origin/master..$GITHUB_SHA" | grep version.txt | wc -l) == 1 ]]
