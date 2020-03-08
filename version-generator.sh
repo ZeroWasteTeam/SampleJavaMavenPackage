@@ -2,7 +2,7 @@
 
 baseVersion=$(head -n 1 version.txt)
 baseVersion=`echo $baseVersion | sed 's/\\r//g'`
-gitSha=$(git log -n1 --format=format:"%H")
+gitSha=$(git rev-parse --short=7 $(git log -n1 --format=format:%H))
 [[ $baseVersion =~ ^[0-9]+\.[0-9]+$ ]] || (echo "The pattern <number(s)>.<number(s)> is not met" && exit 1)
 [[ $baseVersion =~ ^0\.0$ ]] && (echo "The version can not be 0.0" && exit 1)
 [[ $baseVersion =~ ^0[0-9]+\. ]] && (echo "The major version can not be prefixed with 0" && exit 1)
