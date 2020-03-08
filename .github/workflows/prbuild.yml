@@ -29,7 +29,7 @@ jobs:
           echo "Checking Version File is Modified"
           numberOfLinesModified=$(git diff --name-only "origin/master..$GITHUB_SHA" | wc -l)
           echo $numberOfLinesModified
-          numberOfVersionFilesModied=${git diff --name-only "origin/master..$GITHUB_SHA" | grep version.txt | wc -l}
+          numberOfVersionFilesModied=$(git diff --name-only "origin/master..$GITHUB_SHA" | grep ^version.txt$ | wc -l)
           echo $numberOfVersionFilesModied
         
       - name: PR - Gradle Build
