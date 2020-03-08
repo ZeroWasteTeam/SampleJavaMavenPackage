@@ -28,9 +28,9 @@ jobs:
         run: |
           echo "Checking Version File is Modified"
           numberOfLinesModified=$(git diff --name-only "origin/master..$GITHUB_SHA" | wc -l)
-          echo $(numberOfLinesModified)
-          is-version-file-modified=[[ $(git diff --name-only "origin/master..$GITHUB_SHA" | grep version.txt | wc -l) == 1 ]]
-          echo $is-version-file-modified
+          echo $numberOfLinesModified
+          isVersionFileModified=[[ $(git diff --name-only "origin/master..$GITHUB_SHA" | grep version.txt | wc -l) == 1 ]]
+          echo $isVersionFileModified
         
       - name: PR - Gradle Build
         run: gradle build
