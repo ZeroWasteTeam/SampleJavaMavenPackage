@@ -29,7 +29,7 @@ jobs:
           echo "Checking Version File is Modified"
           numberOfFilesModified=$(git diff --name-only "origin/master..$GITHUB_SHA" | wc -l)
           isVersionFileModified=$(git diff --name-only "origin/master..$GITHUB_SHA" version.txt | wc -l)
-          [ "$numberOfVersionFilesModied" -gt "1" ] && [ "$isVersionFileModified"  -eq "1" ] &&  { echo 'Version file modified along with other files. To Change version, no other file should be modified' ; exit 1; }
+          [ $numberOfVersionFilesModied -gt 1 ] && [ $isVersionFileModified  -eq 1 ] &&  { echo 'Version file modified along with other files. To Change version, no other file should be modified' ; exit 1; }
           
         
       - name: PR - Gradle Build
