@@ -18,13 +18,7 @@ jobs:
         with:
           java-version: 1.8
 
-      - name: Git hub ref
-        run: echo $GITHUB_REF
-        
-      - name: Git hub sha
-        run: echo $GITHUB_SHA
-
-      - name: Git Modified Files
+      - name: Check Versioning Rules
         run: |
           chmod +x version-file-modification-validator.sh
           ./version-file-modification-validator.sh origin/master $GITHUB_SHA
