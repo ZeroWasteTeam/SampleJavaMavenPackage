@@ -1,6 +1,5 @@
 #!/bin/bash
 
-
 baseVersion=$(head -n 1 version.txt)
 baseVersion=`echo $baseVersion | sed 's/\\r//g'`
 gitSha=$(git rev-parse --short=7 $(git log -n1 --format=format:%H))
