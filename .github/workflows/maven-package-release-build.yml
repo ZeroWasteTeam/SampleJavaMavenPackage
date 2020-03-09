@@ -23,12 +23,7 @@ jobs:
         id: compute_version
         run: |
           chmod +x version-generator.sh
-          if  [[ ${GITHUB_REF#refs/tags/} == release* ]] ;
-          then
-            version=$(./version-generator.sh temp-release)
-          else  
-            version=$(./version-generator.sh real-release)
-          fi
+          version=$(./version-generator.sh)
           echo $version
           echo "##[set-output name=version;]$(echo $version)"
 
