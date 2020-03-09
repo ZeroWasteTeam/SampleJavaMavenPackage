@@ -10,6 +10,9 @@ isVersionFileModified=$(git diff --name-only "$ref1..$ref2" version.txt | wc -l)
 
 baseVersion=$(git show $ref2:version.txt)
 baseVersion=`echo $baseVersion | sed 's/\\r//g'`
+
+echo "base version $baseVersion"
+
 gitSha=$(git rev-parse --short=7 $(git log -n1 --format=format:%H))
 [[ $baseVersion =~ ^[0-9]+\.[0-9]+$ ]] || (echo "The pattern <number(s)>.<number(s)> is not met" && exit 1)
 [[ $baseVersion =~ ^0\.0$ ]] && (echo "The version can not be 0.0" && exit 1)
