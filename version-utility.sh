@@ -1,7 +1,7 @@
 #!/bin/bash
 
-VERSION_FILE=version.txt
-
+VERSION_FILE="version.txt"
+REFERENCE_BRANCH="origin/master"
 
 readBaseVersion() {
   local VERSION=$(head -n 1 version.txt)
@@ -47,9 +47,16 @@ getCheckoutLatestCommitSha() {
   echo ${GIT_SHA}
 }
 
+isCommitInReferenceBranch() {
+  local GIT_SHA=$1	
+  local TEMP=$(git log ${REFERENCE_BRANCH} | grep ${GIT_SHA})
+  echo "The TEMP is ${TEMP}"
+}
+
 #BASE_VERSION=$(readBaseVersion)
 #validateBaseVersion ${BASE_VERSION}
-getCheckoutLatestCommitSha
+GIT_SHA=$(getCheckoutLatestCommitSha)
+isCommitInReferenceBranch ${GIT_SHA}
 echo "return value ${?}"  
 
 
