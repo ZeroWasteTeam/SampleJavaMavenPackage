@@ -3,58 +3,44 @@
 VERSION_FILE="version.txt"
 REFERENCE_BRANCH="origin/master"
 
-readBaseVersion() {
-  local VERSION=$(head -n 1 version.txt)
-  VERSION=`echo ${VERSION} | sed 's/\\r//g'`
-  echo "${VERSION}"
+exitWithErrorIfNonZero() {
+  local STATUS=$1
+  local MESSAGE=$2
+  [[ ${STATUS} -eq 0 ]] || exitWithError "${MESSAGE}"
 }
 
-validateBaseVersion() {
-  local BASE_VERSION=$1
-  
-  if ! [[ $BASE_VERSION =~ ^[0-9]+\.[0-9]+$ ]]
-  then
-    echo "The base version is not match <number>.<number>" >&2
-	return 1
-  fi
-  
-  if [[ $BASE_VERSION =~ ^0\.0$ ]]
-  then
-    echo "The version can not be 0.0" >&2
-	return 1
-  fi
-  
-  if [[ $BASE_VERSION =~ ^0[0-9]+\. ]]
-  then
-    echo "The major version can not be prefixed with 0" >&2
-	return 1
-  fi
-  
-  if [[ $BASE_VERSION =~ \.0[0-9]+ ]]
-  then
-    echo "The minor version can not be prefixed with 0" >&2
-	return 1
-  fi
+exitWithError() {
+  local MESSAGE=$1
+  { echo >&2 "${MESSAGE}"; exit 1; }
+}
+
+assertBaseVersionIsValid() {
+  local BASE_VERSION=$1  
+  if ! [[ $BASE_VERSION =~ ^[0-9]+\.[0-9]+$ ]]; then exitWithError "The base version is invalid. It doesn't not match <number>.<number>"; fi
+  if [[ $BASE_VERSION =~ ^0\.0$ ]]; then exitWithError "The version can not be 0.0"; fi
+  if [[ $BASE_VERSION =~ ^0[0-9]+\. ]]; then exitWithError "The major version can not be prefixed with 0"; fi
+  if [[ $BASE_VERSION =~ \.0[0-9]+ ]]; then exitWithError "The minor version can not be prefixed with 0"; fi
+}
+
+readBaseVersion() {
+  local VERSION=$(head -n 1 ${VERSION_FILE})
+  if [[ "${#VERSION}" -lt 2 ]]; then exitWithError "Could not read base version from ${VERSION_FILE}"; fi
+  VERSION=`echo ${VERSION} | sed 's/\\r//g'`  
+  assertBaseVersionIsValid $VERSION
+  echo "${VERSION}"
 }
 
 getCheckoutedOutLatestCommitSha() {
   local GIT_SHA=$(git log -n1 --format=format:"%H")
-  if [[ "${#GIT_SHA}" -lt 8 ]]
-  then
-    echo "Could not get the latest Git Sha. Ensure you are running the script in a git repo" >&2
-	return 1
-  fi
+  if [[ "${#GIT_SHA}" -lt 8 ]]; then exitWithError "Could not get the latest Git Sha. Ensure you are running the script in a git repo"; fi
   echo ${GIT_SHA}
 }
 
 isCommitInReferenceBranch() {
   local GIT_SHA=$1	
   local TEMP=$(git log ${REFERENCE_BRANCH} | grep ${GIT_SHA} | wc -l)
-  if ! [[ "${TEMP}" = 1 ]]
-  then
-	return 1
-  fi
-  return 0
+  if ! [[ "${?}" = 0 ]]; then exitWithError "Unable to perform get log"; fi
+  if [[ "${TEMP}" = 1 ]]; then echo "YES"; else echo "NO"; fi
 }
 
 getGitShaForLatestVersionChange() {
@@ -129,7 +115,8 @@ getVersion() {
   echo $VERSION
 }
 
-getVersion
+echo "$(getCheckoutedOutLatestCommitSha)"
+echo "$(isCommitInReferenceBranch $(getCheckoutedOutLatestCommitSha))"
 echo "return value ${?}"  
 
 
