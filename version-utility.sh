@@ -49,8 +49,12 @@ getCheckoutLatestCommitSha() {
 
 isCommitInReferenceBranch() {
   local GIT_SHA=$1	
-  local TEMP=$(git log ${REFERENCE_BRANCH} | grep ${GIT_SHA})
-  echo "The TEMP is ${TEMP}"
+  local TEMP=$(git log ${REFERENCE_BRANCH} | grep ${GIT_SHA} | wc -l)
+  if ! [[ "${TEMP}" = 1 ]]
+  then
+	return 1
+  fi
+  return 0
 }
 
 #BASE_VERSION=$(readBaseVersion)
