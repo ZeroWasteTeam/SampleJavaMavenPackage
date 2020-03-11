@@ -23,7 +23,8 @@ assertBaseVersionIsValid() {
 }
 
 readBaseVersion() {
-  local VERSION=$(head -n 1 ${VERSION_FILE})
+  local REF=$1
+  local VERSION=$(git show ${REF}:${VERSION_FILE})
   if [[ "${#VERSION}" -lt 2 ]]; then exitWithError "Could not read base version from ${VERSION_FILE}"; fi
   VERSION=`echo ${VERSION} | sed 's/\\r//g'`  
   assertBaseVersionIsValid $VERSION
@@ -75,7 +76,7 @@ getDateVersion() {
 }
 
 getVersion() {
-  local BASE_VERSION=$(readBaseVersion)
+  local BASE_VERSION=$(readBaseVersion "HEAD")
   if [[ "$(isCommitInReferenceBranch $(getCheckoutedOutLatestCommitSha))" =  "YES" ]]
   then
     local BUILD_NUMBER=$(getBuildNumber)
@@ -91,6 +92,14 @@ getVersion() {
     local VERSION="${BASE_VERSION}-${DATE_VERSION}-${GIT_SHORT_SHA}"
   fi
   echo $VERSION
+}
+
+
+validateMerge() {
+  local BASE_BRANCH=$1
+  local FEATURE_BRANCH=$2
+  local BASE_VERSION=$(readBaseVersion)
+  
 }
 
 echo "$(getVersion)"
