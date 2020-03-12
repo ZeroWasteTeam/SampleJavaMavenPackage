@@ -26,7 +26,13 @@ readBaseVersion() {
   local REF=$1
   local VERSION=$(git show ${REF}:${VERSION_FILE})
   if [[ "${#VERSION}" -lt 2 ]]; then exitWithError "Could not read base version from ${VERSION_FILE}"; fi
-  VERSION=`echo ${VERSION} | sed 's/\\r//g'`  
+  VERSION=`echo ${VERSION} | sed 's/\\r//g'`
+  echo "${VERSION}"
+}
+
+readBaseVersionWithValidation() {
+  local REF=$1
+  local VERSION=readBaseVersion ${REF}  
   assertBaseVersionIsValid $VERSION
   echo "${VERSION}"
 }
@@ -76,7 +82,7 @@ getDateVersion() {
 }
 
 getVersion() {
-  local BASE_VERSION=$(readBaseVersion "HEAD")
+  local BASE_VERSION=$(readBaseVersionWithValidation "HEAD")
   if [[ "$(isCommitInReferenceBranch $(getCheckoutedOutLatestCommitSha))" =  "YES" ]]
   then
     local BUILD_NUMBER=$(getBuildNumber)
@@ -98,7 +104,20 @@ getVersion() {
 validateMerge() {
   local BASE_BRANCH=$1
   local FEATURE_BRANCH=$2
-  local BASE_VERSION=$(readBaseVersion)
+  local BASE_VERSION=$(readBaseVersion ${BASE_BRANCH})
+  local FEATURE_VERSION=$(readBaseVersion ${FEATURE_BRANCH})
+  if [[ "${BASE_VERSION}" = "${FEATURE_VERSION}" ]]; then exit 0; fi
+  FEATURE_VERSION=$(readBaseVersionWithValidation ${FEATURE_BRANCH})
+  BASE_VERSION=$(readBaseVersionWithValidation ${BASE_BRANCH})
+  NUMBER_OF_FILES_MODIFIED=$(git diff --name-only "$ref1..$ref2" | wc -l)
+  
+  if [ "${NUMBER_OF_FILES_MODIFIED}" -gt 1 ]; then exitWithError 'Version file modified along with other files. To Change version, no other file should be modified'; fi
+  if (( $(echo "$initialVersion > $finalVersion" |bc -l) ))
+  then
+	  echo 'Version number is not properly incremented'
+	  exit 1;
+  fi
+
   
 }
 

@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - 'master'
+      - 'release*'
     tags:
       - 'release*'
 jobs:
@@ -26,7 +27,17 @@ jobs:
           version=$(./version-generator.sh)
           echo $version
           echo "##[set-output name=version;]$(echo $version)"
-
+          
+      - name: Branch Name
+        run: echo "${GITHUB_REF#refs/heads/}"
+      
+      - name: Tag Name
+        run: echo "${GITHUB_REF#refs/tags/}"
+      
+      - name: All Branches
+        run: echo $(git branch -r --contains ${GITHUB_SHA})
+      
+      
       - name: Gradle Build
         run: gradle build
           
