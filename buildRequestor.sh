@@ -42,9 +42,10 @@ then
   fi
 fi
 
-COMMAND=curl -H "Accept: application/vnd.github.everest-preview+json" -H "Authorization: token {}" --request POST --data '{"event_type": "${BUILD_TYPE}", "client_payload":{ "buildType" : "${BUILD_TYPE}", "buildBranch" : "${BUILD_BRANCH}", "buildSha":"${BUILD_SHA}" }}' https://api.github.com/repos/${OWNER_NAME}/${REPOSITORY_NAME}/dispatches
+COMMAND="curl -H \"Accept: application/vnd.github.everest-preview+json\" -H \"Authorization: token ${TOKEN}\" --request POST --data '{\"event_type\": \"${BUILD_TYPE}\", \"client_payload\":{ \"buildType\" : \"${BUILD_TYPE}\", \"buildBranch\" : \"${BUILD_BRANCH}\", \"buildSha\":\"${BUILD_SHA}\" }}' https://api.github.com/repos/${OWNER_NAME}/${REPOSITORY_NAME}/dispatches"
 
-$(${COMMAND})
+
+eval "$COMMAND"
 
 
 
