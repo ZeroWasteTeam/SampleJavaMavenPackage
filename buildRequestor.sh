@@ -44,14 +44,14 @@ esac
 
 
 
-
+echo "Build type is ${BUILD_TYPE}"
+echo "*****************************"
 echo "Owner name is ${OWNER_NAME}"
 echo "Repository name is ${REPOSITORY_NAME}"
-echo "Build type is ${BUILD_TYPE}"
 echo "Build branch is ${BUILD_BRANCH}"
 echo "Build sha is ${BUILD_SHA}"
 
-COMMAND="curl -H \"Accept: application/vnd.github.everest-preview+json\" -H \"Authorization: token ${TOKEN}\" --request POST --data '{\"event_type\": \"${BUILD_TYPE}\", \"client_payload\":{ \"buildType\" : \"${BUILD_TYPE}\", \"buildBranch\" : \"${BUILD_BRANCH}\", \"buildSha\":\"${BUILD_SHA}\" }}' https://api.github.com/repos/${OWNER_NAME}/${REPOSITORY_NAME}/dispatches"
+COMMAND="curl -H \"Accept: application/vnd.github.everest-preview+json\" -H \"Authorization: token ${TOKEN}\" --request POST --data '{\"event_type\": \"${BUILD_TYPE}\", \"client_payload\":{ \"buildBranch\" : \"${BUILD_BRANCH}\", \"buildSha\":\"${BUILD_SHA}\" }}' https://api.github.com/repos/${OWNER_NAME}/${REPOSITORY_NAME}/dispatches"
 
 
 eval "$COMMAND"
