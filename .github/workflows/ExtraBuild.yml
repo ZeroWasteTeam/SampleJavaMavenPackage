@@ -11,4 +11,7 @@ jobs:
 
     steps:
       - name: Logging
-        run: echo "hi how are you doing?" 
+        run: echo "hi how are you doing?"
+
+      - name: accessing payload
+        run: echo "${{  github.event.client_payload.sha }}"        
