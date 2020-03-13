@@ -2,11 +2,10 @@
 
 OWNER_NAME="ZeroWasteTeam"
 REPOSITORY_NAME="SampleJavaMavenPackage"
-BUILD_TYPE="rebuild" # test, release
 BUILD_BRANCH="master"
 BUILD_SHA=$(git log origin/master -n 1 --format=format:"%H")
 
-while getopts o:r:t:s:b: OPTION
+while getopts o:r:s:b: OPTION
 do
   case ${OPTION} in
   o)
@@ -15,9 +14,6 @@ do
   r)
     REPOSITORY_NAME="${OPTARG}"
 	;;
-  t)
-    BUILD_TYPE="${OPTARG}"
-	;;
   s)
     BUILD_SHA="${OPTARG}"
 	;;
@@ -25,7 +21,8 @@ do
     BUILD_BRANCH="${OPTARG}"
 	;;
   ?)
-    echo "USAGE is wrong" #The usage has to be done
+    echo "${0} [-b <branchname>] [-s <git sha >] [-r <repositoryname>] [-o <ownername>] "
+	exit 1;
     ;;
   esac
 done
@@ -33,14 +30,20 @@ done
 TOKEN=$(head -n 1 token.txt)
 TOKEN=`echo ${TOKEN} | sed 's/\\r//g'`
 
-if [[ "${BUILD_TYPE}" = "rebuild" ]] ;
-then
-  if ! [[ "${BUILD_BRANCH}" = "master" ]] ;
-  then
-    BUILD_BRANCH="master"
-	echo "Build branch has to be master when build type is rebuild"
-  fi
-fi
+case "${BUILD_BRANCH}" in
+	master)
+		BUILD_TYPE=rebuild
+		;;
+	release-*)
+		BUILD_TYPE=release
+		;;
+    *)
+		BUILD_TYPE=test
+		;;
+esac
+
+
+
 
 echo "Owner name is ${OWNER_NAME}"
 echo "Repository name is ${REPOSITORY_NAME}"
