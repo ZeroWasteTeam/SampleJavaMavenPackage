@@ -1,0 +1,15 @@
+name: Extra Build
+
+on:
+  pull_request:
+    branches:
+      - 'master'
+jobs:
+
+  build-and-test:
+    name: Extra Build
+    runs-on: ubuntu-18.04
+
+    steps:
+      - name: Logging
+        run: echo "hi how are you doing?" 
