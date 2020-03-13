@@ -1,5 +1,0 @@
-curl -H "Accept: application/vnd.github.everest-preview+json" \
-    -H "Authorization: token <token here>" \
-    --request POST \
-    --data '{"event_type": "do-something", "client_payload":{ "sha" : "dfsklfjsklafjklasjfl" }}' \
-    https://api.github.com/repos/ZeroWasteTeam/SampleJavaMavenPackage/dispatches
