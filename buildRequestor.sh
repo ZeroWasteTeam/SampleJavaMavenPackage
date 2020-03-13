@@ -6,7 +6,7 @@ BUILD_TYPE="rebuild" # test, release
 BUILD_BRANCH="master"
 BUILD_SHA=$(git log origin/master -n 1 --format=format:"%H")
 
-while getopts o:r:t:s:b OPTION
+while getopts o:r:t:s:b: OPTION
 do
   case ${OPTION} in
   o)
@@ -41,6 +41,12 @@ then
 	echo "Build branch has to be master when build type is rebuild"
   fi
 fi
+
+echo "Owner name is ${OWNER_NAME}"
+echo "Repository name is ${REPOSITORY_NAME}"
+echo "Build type is ${BUILD_TYPE}"
+echo "Build branch is ${BUILD_BRANCH}"
+echo "Build sha is ${BUILD_SHA}"
 
 COMMAND="curl -H \"Accept: application/vnd.github.everest-preview+json\" -H \"Authorization: token ${TOKEN}\" --request POST --data '{\"event_type\": \"${BUILD_TYPE}\", \"client_payload\":{ \"buildType\" : \"${BUILD_TYPE}\", \"buildBranch\" : \"${BUILD_BRANCH}\", \"buildSha\":\"${BUILD_SHA}\" }}' https://api.github.com/repos/${OWNER_NAME}/${REPOSITORY_NAME}/dispatches"
 
