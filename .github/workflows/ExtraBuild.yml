@@ -1,9 +1,8 @@
 name: Extra Build
 
 on:
-  pull_request:
-    branches:
-      - 'master'
+  repository_dispatch:
+
 jobs:
 
   build-and-test:
