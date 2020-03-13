@@ -6,7 +6,7 @@ BUILD_TYPE="rebuild" # test, release
 BUILD_BRANCH="master"
 BUILD_SHA=$(git log origin/master -n 1 --format=format:"%H")
 
-while getopts o:r:t:s: OPTION
+while getopts o:r:t:s:b OPTION
 do
   case ${OPTION} in
   o)
