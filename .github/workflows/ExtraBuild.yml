@@ -10,8 +10,12 @@ jobs:
     runs-on: ubuntu-18.04
 
     steps:
-      - name: Logging
-        run: echo "hi how are you doing?"
+      - name: BuildType
+        run: echo "${{  github.event.client_payload.buildType }}"
 
-      - name: accessing payload
-        run: echo "${{  github.event.client_payload.sha }}"        
+      - name: BuildBranch
+        run: echo "${{  github.event.client_payload.buildBranch }}"        
+
+      - name: BuildSha
+        run: echo "${{  github.event.client_payload.buildSha }}"
+
