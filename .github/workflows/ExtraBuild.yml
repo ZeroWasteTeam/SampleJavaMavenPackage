@@ -12,7 +12,14 @@ jobs:
     steps:
       - name: Making Scripts Executable
         run: |
-          cd ../.github/scripts
+          pwd
+          ls
+          cd ..
+          pwd
+          ls
+          cd ..
+          pwd
+          ls
           echo "::set-env name=PATH::${PATH}:$(pwd)"
           chmod +x *
         
