@@ -17,7 +17,7 @@ jobs:
     steps:
       - name: If Repository Dispatch Checkout Sha
         if: github.event_name == 'repository_dispatch'
-        run: echo "running of repository_dispatch
+        run: echo "running of repository_dispatch"
         
       - name: BuildType
         run: echo "${{  github.event.client_payload.buildType }}"
