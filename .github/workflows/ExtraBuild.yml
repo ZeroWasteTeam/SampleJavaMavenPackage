@@ -20,9 +20,15 @@ jobs:
           cd ci-scripts
           echo "::set-env name=PATH::${PATH}:$(pwd)"
           chmod +x *
+          
+      - name: Making Scripts Executable
+        run: |
+          cd .github/scripts
+          echo "::set-env name=PATH::${PATH}:$(pwd)"
+          chmod +x *
         
-      - name: pwd
-        run: pwd        
+      - name: ci-test
+        run: ci-test        
         
       - name: BuildType
         run: echo "${{  github.event.client_payload.buildType }}"
