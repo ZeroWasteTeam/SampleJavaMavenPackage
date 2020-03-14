@@ -41,6 +41,9 @@ jobs:
 
       - name: Assert Commit is in the specified branch
         run: ci-assertCommitInBranch "${CI_BUILD_SHA}" origin/"${CI_BUILD_BRANCH}"
+        
+      - name: Set Base Version
+        run: echo "::set-env name=CI_BASE_VERSION::$(ci-readBaseVersion)"
 
 # if not master branch
 #MakeSureLastCommitOfVersionIsInMaster
