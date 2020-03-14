@@ -25,7 +25,7 @@ jobs:
     
       - name: If Repository Dispatch Checkout Sha
         if: github.event_name == 'repository_dispatch'
-        run: git checkout "${{  github.event.client_payload.buildSha }}"
+        run: git checkout -f "${{  github.event.client_payload.buildSha }}"
         
       - name: Setting the build sha variable
         run: |
