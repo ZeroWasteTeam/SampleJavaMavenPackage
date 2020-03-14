@@ -30,12 +30,15 @@ jobs:
       - name: Setting the build sha variable
         run: echo "::set-env name=CI_BUILD_SHA::$(git log  -n 1 --format=format:%H)"      
 
-
+      - name: If Repository Dispatch Set build branch
+        if: github.event_name == 'repository_dispatch'
+        run: echo "::set-env name=CI_BUILD_BRANCH::${{  github.event.client_payload.buildBranch }}"
 
         
       - name: logging
         run: |
           echo "CI_BUILD_SHA is ${CI_BUILD_SHA}"
+          echo "CI_BUILD_BRANCH is ${CI_BUILD_BRANCH}"
           
         
       - name: BuildType
