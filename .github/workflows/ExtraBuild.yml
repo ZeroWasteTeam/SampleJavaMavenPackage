@@ -57,18 +57,27 @@ jobs:
       - name: Verify Last Version Change Is In Master
         run: ci-assertLastVersionChangeIsInBranch "origin/master"
 
-#ComputVersionForLastCommit
+      - name: Get Release Version
+        run: |
+          set -e
+          RELEASE_VERSION=$({ci-GetReleaseVersion} ${CI_BASE_VERSION} ${CI_BUILD_BRANCH} ${CI_BUILD_SHA})
+          echo "::set-env name=CI_RELEASE_VERSION::${RELEASE_VERSION}"
+      - name: Gradle Build
+        run: gradle build
+          
+      - name: Unit Test
+        run: gradle test
 
-#Build
+      - name: Gradle Publish
+        run: gradle -Pgpr.user=nachiappannk -Pgpr.key=${{ secrets.GITHUB_TOKEN }} -Pgpr.version="${CI_RELEASE_VERSION}" publish
 
-#Publish
 
-      - name: BuildType
-        run: echo "${{  github.event.client_payload.buildType }}"
+#      - name: BuildType
+#        run: echo "${{  github.event.client_payload.buildType }}"
 
-      - name: BuildBranch
-        run: echo "${{  github.event.client_payload.buildBranch }}"        
+#      - name: BuildBranch
+#        run: echo "${{  github.event.client_payload.buildBranch }}"        
 
-      - name: BuildSha
-        run: echo "${{  github.event.client_payload.buildSha }}"
+#      - name: BuildSha
+#        run: echo "${{  github.event.client_payload.buildSha }}"
 
