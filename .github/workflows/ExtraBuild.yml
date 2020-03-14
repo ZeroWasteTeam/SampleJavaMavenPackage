@@ -44,9 +44,9 @@ jobs:
         
       - name: Set Base Version
         run: |
-          set -euo pipefail
-          shopt -s inherit_errexit
-          echo "::set-env name=CI_BASE_VERSION::$(ci-readBaseVersion)"
+          set -e
+          BASE_VERSION=$(ci-readBaseVersion)
+          echo "::set-env name=CI_BASE_VERSION::${BASE_VERSION}"
 
 # if not master branch
 #MakeSureLastCommitOfVersionIsInMaster
