@@ -1,0 +1,29 @@
+#!/bin/bash
+
+getVersion() {
+  local BASE_VERSION=$1
+  local BRANCH=$2
+  local COMMIT_SHA=$3
+  
+  
+  case "${BRANCH}" in
+	master)
+      echo 'Starting'
+	  ;;
+	release-*)
+	  local RELEASE_NAME="${BRANCH/release-/""}"
+	  local TIME_VERSION=$(git log -1 --format="%at" --date=iso | xargs -I{} date -u -d @{} +%Y-%m-%d-%H-%M-%S)
+	  local GIT_SHORT_SHA=$(git rev-parse --short=7 ${COMMIT_SHA})
+	  VERSION="${BASE_VERSION}-${RELEASE_NAME}-${TIME_VERSION}-${GIT_SHORT_SHA}"
+	  ;;
+	*)
+	  local TIME_VERSION=$(git log -1 --format="%at" --date=iso | xargs -I{} date -u -d @{} +%Y-%m-%d-%H-%M-%S)
+	  local GIT_SHORT_SHA=$(git rev-parse --short=7 ${COMMIT_SHA})
+	  VERSION="${BASE_VERSION}-test-${TIME_VERSION}-${GIT_SHORT_SHA}"
+	  ;;
+  esac
+  echo "${VERSION}"
+}
+
+getVersion $1 $2 $3
+
