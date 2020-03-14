@@ -21,7 +21,7 @@ assertBaseVersionIsValid() {
   if [[ $BASE_VERSION =~ ^0[0-9]+\. ]]; then exitWithError "The major version can not be prefixed with 0"; fi
   if [[ $BASE_VERSION =~ \.0[0-9]+ ]]; then exitWithError "The minor version can not be prefixed with 0"; fi
 }
-
+  
 readBaseVersion() {
   local REF=$1
   local VERSION=$(git show ${REF}:${VERSION_FILE})
