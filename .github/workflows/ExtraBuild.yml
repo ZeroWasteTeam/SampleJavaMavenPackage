@@ -13,6 +13,9 @@ jobs:
       - name: set env
         run: echo "::set-env name=PATH::${PATH}:/bin/nachi"
         
+      - name: pwd
+        run: pwd        
+        
       - name: BuildType
         run: echo "${{  github.event.client_payload.buildType }}"
 
