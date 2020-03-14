@@ -10,25 +10,8 @@ jobs:
     runs-on: ubuntu-18.04
 
     steps:
-      - uses: actions/checkout@v1
-
-      - name: ls
-        run: ls        
-    
-      - name: Making Scripts Executable
-        run: |
-          cd ci-scripts
-          echo "::set-env name=PATH::${PATH}:$(pwd)"
-          chmod +x *
-          
-      - name: Making Scripts Executable
-        run: |
-          cd .github/scripts
-          echo "::set-env name=PATH::${PATH}:$(pwd)"
-          chmod +x *
-        
-      - name: ci-test
-        run: ci-test        
+      - name: If Repository Dispatch Checkout Sha
+        run: echo "${{ github.event_name }}"
         
       - name: BuildType
         run: echo "${{  github.event.client_payload.buildType }}"
