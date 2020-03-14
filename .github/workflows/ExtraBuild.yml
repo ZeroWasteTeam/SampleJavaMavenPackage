@@ -40,10 +40,16 @@ jobs:
           fi
 
       - name: Assert Commit is in the specified branch
-        run: ci-assertCommitInBranch "${CI_BUILD_SHA}" "${CI_BUILD_BRANCH}"
+        run: ci-assertCommitInBranch "${CI_BUILD_SHA}" origin/"${CI_BUILD_BRANCH}"
 
 # if not master branch
 #MakeSureLastCommitOfVersionIsInMaster
+
+# if master
+# Make sure no change in version file in the current commit or Make sure no other changes in any other file
+
+#if Master
+#if change  
 
 
       - name: logging
