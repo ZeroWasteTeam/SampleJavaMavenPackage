@@ -15,9 +15,17 @@ jobs:
     runs-on: ubuntu-18.04
 
     steps:
+      - uses: actions/checkout@v1
+          
+      - name: Making Custom Scripts As Executable
+        run: |
+          cd .github/scripts
+          echo "::set-env name=PATH::${PATH}:$(pwd)"
+          chmod +x *
+    
       - name: If Repository Dispatch Checkout Sha
         if: github.event_name == 'repository_dispatch'
-        run: echo "running of repository_dispatch"
+        run: git checkout "${{  github.event.client_payload.buildSha }}"
         
       - name: BuildType
         run: echo "${{  github.event.client_payload.buildType }}"
