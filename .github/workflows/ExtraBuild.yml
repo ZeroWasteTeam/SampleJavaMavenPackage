@@ -27,4 +27,16 @@ jobs:
         
       - name: Show PATH 2
         run: echo "${PATH}"
+        
+      - name: Show bash rc
+        run: cat ~/.bashrc
+
+      - name: Show bash rc
+        run: echo "export PATH=${PATH}:bin/nash" >> ~/.bashrc
+
+      - name: Show PATH 3
+        run: echo "${PATH}"
+                
+        
+        
 
