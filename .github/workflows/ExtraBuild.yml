@@ -1,4 +1,4 @@
-name: Extra Build
+name: Maven Package Release Build
 
 on:
   repository_dispatch:
@@ -10,8 +10,8 @@ on:
 
 jobs:
 
-  build-and-test:
-    name: Extra Build
+  build-test-version-publish:
+    name: Build Test Version Publish
     runs-on: ubuntu-18.04
 
     steps:
