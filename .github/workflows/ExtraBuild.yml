@@ -34,10 +34,12 @@ jobs:
         run: |
           if [[ ${{ github.event_name }} = 'repository_dispatch' ]] ;
           then
-            echo "::set-env name=CI_BUILD_BRANCH::${{  github.event.client_payload.buildBranch }}"
+            BUILD_BRANCH="${{  github.event.client_payload.buildBranch }}"
+            
           else
-            echo "::set-env name=CI_BUILD_BRANCH::${GITHUB_REF#refs/heads/}"
+            BUILD_BRANCH="${GITHUB_REF#refs/heads/}"
           fi
+          echo "::set-env name=CI_BUILD_BRANCH::${BUILD_BRANCH}"
 
       - name: Assert Commit is in the specified branch
         run: ci-assertCommitInBranch "${CI_BUILD_SHA}" origin/"${CI_BUILD_BRANCH}"
