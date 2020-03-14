@@ -60,7 +60,7 @@ jobs:
       - name: Get Release Version
         run: |
           set -e
-          RELEASE_VERSION=$({ci-GetReleaseVersion} ${CI_BASE_VERSION} ${CI_BUILD_BRANCH} ${CI_BUILD_SHA})
+          RELEASE_VERSION=$(ci-GetReleaseVersion ${CI_BASE_VERSION} ${CI_BUILD_BRANCH} ${CI_BUILD_SHA})
           echo "::set-env name=CI_RELEASE_VERSION::${RELEASE_VERSION}"
       - name: Gradle Build
         run: gradle build
