@@ -18,4 +18,13 @@ jobs:
 
       - name: BuildSha
         run: echo "${{  github.event.client_payload.buildSha }}"
+        
+      - name: Show PATH 1
+        run: echo "${PATH}"
+
+      - name: Set Path
+        run: export PATH=${PATH}:/bin/nash
+        
+      - name: Show PATH 2
+        run: echo "${PATH}"
 
