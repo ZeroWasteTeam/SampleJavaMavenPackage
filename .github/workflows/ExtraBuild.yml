@@ -12,14 +12,7 @@ jobs:
     steps:
       - name: Making Scripts Executable
         run: |
-          pwd
-          ls
-          cd ..
-          pwd
-          ls
-          cd ..
-          pwd
-          ls
+          cd ci-scripts
           echo "::set-env name=PATH::${PATH}:$(pwd)"
           chmod +x *
         
