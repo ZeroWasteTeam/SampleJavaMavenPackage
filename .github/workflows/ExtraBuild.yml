@@ -30,14 +30,6 @@ jobs:
       - name: Setting the build sha variable
         run: echo "::set-env name=CI_BUILD_SHA::$(git log  -n 1 --format=format:%H)"      
         
-      - name: Assert Commit is in the specified branch
-        run: ci-assertCommitInBranch "${CI_BUILD_SHA}" "${CI_BUILD_BRANCH}"
-
-# if not master branch
-#MakeSureLastCommitOfVersionIsInMaster
-
-
-
       - name:  Set build branch
         run: |
           if [[ ${{ github.event_name }} = 'repository_dispatch' ]] ;
@@ -46,7 +38,14 @@ jobs:
           else
             echo "::set-env name=CI_BUILD_BRANCH::${GITHUB_REF#refs/heads/}"
           fi
-        
+
+      - name: Assert Commit is in the specified branch
+        run: ci-assertCommitInBranch "${CI_BUILD_SHA}" "${CI_BUILD_BRANCH}"
+
+# if not master branch
+#MakeSureLastCommitOfVersionIsInMaster
+
+
       - name: logging
         run: |
           echo "CI_BUILD_SHA is ${CI_BUILD_SHA}"
