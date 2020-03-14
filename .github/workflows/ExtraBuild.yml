@@ -31,7 +31,6 @@ jobs:
         run: echo "::set-env name=CI_BUILD_SHA::$(git log  -n 1 --format=format:%H)"      
 
       - name:  Set build branch
-        if: github.event_name == 'repository_dispatch'
         run: |
           if [[ ${{ github.event_name }} = 'repository_dispatch' ]] ;
           then
