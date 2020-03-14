@@ -10,8 +10,11 @@ jobs:
     runs-on: ubuntu-18.04
 
     steps:
-      - name: set env
-        run: echo "::set-env name=PATH::${PATH}:/bin/nachi"
+      - name: Making Scripts Executable
+        run: |
+          cd ../.github/scripts
+          echo "::set-env name=PATH::${PATH}:$(pwd)"
+          chmod +x *
         
       - name: pwd
         run: pwd        
