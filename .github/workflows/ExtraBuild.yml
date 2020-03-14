@@ -54,22 +54,15 @@ jobs:
           BASE_VERSION=$(ci-readBaseVersion)
           echo "::set-env name=CI_BASE_VERSION::${BASE_VERSION}"
 
-# if not master branch
-#MakeSureLastCommitOfVersionIsInMaster
+      - name: Verify Last Version Change Is In Master
+        run: ci-assertLastVersionChangeIsInBranch "origin/master"
 
-# if master
-# Make sure no change in version file in the current commit or Make sure no other changes in any other file
+#ComputVersionForLastCommit
 
-#if Master
-#if change  
+#Build
 
+#Publish
 
-      - name: logging
-        run: |
-          echo "CI_BUILD_SHA is ${CI_BUILD_SHA}"
-          echo "CI_BUILD_BRANCH is ${CI_BUILD_BRANCH}"
-          
-        
       - name: BuildType
         run: echo "${{  github.event.client_payload.buildType }}"
 
@@ -78,25 +71,4 @@ jobs:
 
       - name: BuildSha
         run: echo "${{  github.event.client_payload.buildSha }}"
-        
-      - name: Show PATH 1
-        run: echo "${PATH}"
-
-      - name: Set Path
-        run: export PATH=${PATH}:/bin/nash
-        
-      - name: Show PATH 2
-        run: echo "${PATH}"
-        
-      - name: Show bash rc
-        run: cat ~/.bashrc
-
-      - name: Show bash rc
-        run: echo "export PATH=${PATH}:bin/nash" >> ~/.bashrc
-
-      - name: Show PATH 3
-        run: echo "${PATH}"
-                
-        
-        
 
