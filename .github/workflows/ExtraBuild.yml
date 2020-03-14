@@ -10,9 +10,9 @@ jobs:
     runs-on: ubuntu-18.04
 
     steps:
-      env:
-        PATH: ${PATH}:/bin/nash/john
-      
+      - name: set env
+        run: echo "::set-env name=PATH::${PATH}:/bin/nachi"
+        
       - name: BuildType
         run: echo "${{  github.event.client_payload.buildType }}"
 
