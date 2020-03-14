@@ -27,6 +27,17 @@ jobs:
         if: github.event_name == 'repository_dispatch'
         run: git checkout "${{  github.event.client_payload.buildSha }}"
         
+      - name: Setting the build sha variable
+        run: echo "::set-env name=CI_BUILD_SHA::$(git log  -n 1 --format=format:%H)"      
+
+
+
+        
+      - name: logging
+        run: |
+          echo "CI_BUILD_SHA is ${CI_BUILD_SHA}"
+          
+        
       - name: BuildType
         run: echo "${{  github.event.client_payload.buildType }}"
 
