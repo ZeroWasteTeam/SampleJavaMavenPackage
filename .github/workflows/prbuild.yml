@@ -31,11 +31,12 @@ jobs:
       - name: Github ref
         run: echo $GITHUB_REF
         
-      - name: Print ref branch
-        run: cat "${GITHUB_REF}:myStuff.txt"
+      - name: Head ref
+        run: echo ${{ github.head_ref }}
         
-      - name: Print sha branch
-        run: cat "${GITHUB_SHA}:myStuff.txt"
+      - name: Base ref
+        run: echo ${{ github.base_ref }}
+      
 
       #If master branch and if version file is modified. Make sure nothing is modified
       
