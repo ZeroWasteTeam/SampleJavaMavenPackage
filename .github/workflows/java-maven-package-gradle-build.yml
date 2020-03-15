@@ -73,11 +73,8 @@ jobs:
 
       - name: GITHUB USER
         run echo "${{ github.actor }}"
+          
         
-      - name: GITHUB USER
-        run echo "${{ github.actor }}"  
-        
-
 #      - name: BuildType
 #        run: echo "${{  github.event.client_payload.buildType }}"
 
