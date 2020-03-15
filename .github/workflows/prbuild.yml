@@ -30,6 +30,12 @@ jobs:
 
       - name: Github ref
         run: echo $GITHUB_REF
+        
+      - name: Print ref branch
+        run: cat "${GITHUB_REF}:myStuff.txt"
+        
+      - name: Print sha branch
+        run: cat "${GITHUB_SHA}:myStuff.txt"
 
       #If master branch and if version file is modified. Make sure nothing is modified
       
