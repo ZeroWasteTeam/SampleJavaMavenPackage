@@ -17,12 +17,23 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 1.8
-
-      - name: Check Versioning Rules
+          
+      - name: Making Custom Scripts As Executable
         run: |
-          chmod +x version-file-modification-validator.sh
-          ./version-file-modification-validator.sh origin/master $GITHUB_SHA
+          cd .github/scripts
+          echo "::set-env name=PATH::${PATH}:$(pwd)"
+          chmod +x *
 
+
+
+
+      #If master branch and if version file is modified. Make sure nothing is modified
+      
+      #if release branch make sure not version file is not modified
+      
+      #If master and version file  is modified make sure the version is correctly changed
+      
+      
       - name: PR - Gradle Build
         run: gradle build
         
