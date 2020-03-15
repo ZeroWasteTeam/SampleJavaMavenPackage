@@ -69,8 +69,14 @@ jobs:
         run: gradle test
 
       - name: Gradle Publish
-        run: gradle -Pgpr.user=nachiappannk -Pgpr.key=${{ secrets.GITHUB_TOKEN }} -Pgpr.version="${CI_RELEASE_VERSION}" publish
+        run: gradle -Pgpr.user="${{ github.actor }}" -Pgpr.key="${{ secrets.PACKAGE_TOKEN }}" -Pgpr.version="${CI_RELEASE_VERSION}" publish
 
+      - name: GITHUB USER
+        run echo "${{ github.actor }}"
+        
+      - name: GITHUB USER
+        run echo "${{ github.actor }}"  
+        
 
 #      - name: BuildType
 #        run: echo "${{  github.event.client_payload.buildType }}"
