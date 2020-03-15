@@ -72,7 +72,7 @@ jobs:
         run: gradle -Pgpr.user="${{ github.actor }}" -Pgpr.key="${{ secrets.PACKAGE_TOKEN }}" -Pgpr.version="${CI_RELEASE_VERSION}" publish
 
       - name: GITHUB USER
-        run echo "${{ github.actor }}"
+        run: echo "${{ github.actor }}"
           
         
 #      - name: BuildType
