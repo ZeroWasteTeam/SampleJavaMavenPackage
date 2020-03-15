@@ -1,6 +1,6 @@
 #!/bin/bash
 
-VERSION_SHA=$(ci-GetLastVersionChangeSha)
-BUILD_VERSION=$(ci-GetNumberOfCommitsSince ${VERSION_SHA})
+VERSION_SHA=$(ci-getLastVersionChangeSha)
+BUILD_VERSION=$(ci-getNumberOfCommitsSince ${VERSION_SHA})
 echo ${BUILD_VERSION}
 

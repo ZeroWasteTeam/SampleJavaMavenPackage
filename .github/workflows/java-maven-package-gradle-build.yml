@@ -60,7 +60,7 @@ jobs:
       - name: Get Release Version
         run: |
           set -e
-          RELEASE_VERSION=$(ci-GetReleaseVersion ${CI_BASE_VERSION} ${CI_BUILD_BRANCH} ${CI_BUILD_SHA})
+          RELEASE_VERSION=$(ci-getReleaseVersion ${CI_BASE_VERSION} ${CI_BUILD_BRANCH} ${CI_BUILD_SHA})
           echo "::set-env name=CI_RELEASE_VERSION::${RELEASE_VERSION}"
       - name: Gradle Build
         run: gradle build
@@ -70,11 +70,7 @@ jobs:
 
       - name: Gradle Publish
         run: gradle -Pgpr.repo="https://maven.pkg.github.com/ZeroWasteTeam/SampleJavaMavenPackage" -Pgpr.user="${{ github.actor }}" -Pgpr.key="${{ secrets.GITHUB_TOKEN }}" -Pgpr.version="${CI_RELEASE_VERSION}" publish
-
-      - name: GITHUB USER
-        run: echo "${{ github.actor }}"
-          
-        
+                  
 #      - name: BuildType
 #        run: echo "${{  github.event.client_payload.buildType }}"
 

@@ -8,7 +8,7 @@ getVersion() {
   
   case "${BRANCH}" in
 	master)
-      local BUILD_NUMBER=$(ci-GetBuildNumber)
+      local BUILD_NUMBER=$(ci-getBuildNumber)
 	  local VERSION="${BASE_VERSION}.${BUILD_NUMBER}"
       if [ "${BUILD_NUMBER}" != 0 ]
       then
