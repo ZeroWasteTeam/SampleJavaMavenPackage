@@ -39,6 +39,7 @@ publishing {
             version = project.findProperty("gpr.version")?: '0.0.1'
             from(components.java)
         }
+
     }
 }
 
