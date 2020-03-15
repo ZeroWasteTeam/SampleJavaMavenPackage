@@ -25,7 +25,7 @@ publishing {
     repositories {
         maven {
             name = "GitHubPackages"
-            url = uri("https://maven.pkg.github.com/ZeroWasteTeam/SampleJavaMavenPackage")
+            url = uri("https://maven.pkg.github.com/ZeroWasteTeam/MavenRepo")
             credentials {
                 username = project.findProperty("gpr.user") ?: System.getenv("USERNAME")
                 password = project.findProperty("gpr.key") ?: System.getenv("PASSWORD")
@@ -36,7 +36,8 @@ publishing {
         gpr(MavenPublication) {
             //groupId 'com.zerowasteteam'
             //artifactId 'sample-maven'
-            version = project.findProperty("gpr.version")?: '0.0.1'
+            artifactId 'sample-java-maven-package' //when not given the project name
+			version = project.findProperty("gpr.version")?: '0.0.1'
             from(components.java)
         }
 

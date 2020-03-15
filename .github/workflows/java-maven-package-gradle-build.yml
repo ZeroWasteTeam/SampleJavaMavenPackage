@@ -69,7 +69,7 @@ jobs:
         run: gradle test
 
       - name: Gradle Publish
-        run: gradle -Pgpr.user="${{ github.actor }}" -Pgpr.key="${{ secrets.PACKAGE_TOKEN }}" -Pgpr.version="${CI_RELEASE_VERSION}" publish
+        run: gradle -Pgpr.repo="https://maven.pkg.github.com/ZeroWasteTeam/MavenRepo" -Pgpr.user="${{ github.actor }}" -Pgpr.key="${{ secrets.PACKAGE_TOKEN }}" -Pgpr.version="${CI_RELEASE_VERSION}" publish
 
       - name: GITHUB USER
         run: echo "${{ github.actor }}"
