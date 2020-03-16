@@ -3,9 +3,6 @@
 TYPE=$1
 VERSION=$2
 
-echo "Type is ${#TYPE}" >&2
-echo "Version is ${#VERSION}" >&2
-
 if [[ $VERSION =~ ^([0-9]+)\.([0-9]+)$ ]] ; then
   MAJOR_VERSION=${BASH_REMATCH[1]}
   MINOR_VERSION=${BASH_REMATCH[2]}
