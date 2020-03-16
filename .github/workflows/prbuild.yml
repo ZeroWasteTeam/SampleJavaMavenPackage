@@ -19,28 +19,14 @@ jobs:
         with:
           java-version: 1.8
           
-      - name: Printing PATH
-        run: echo "PATH is ${PATH}"
-          
       - name: Making Custom Scripts As Executable
         run: |
-          echo "PATH is ${PATH}"
           cd .github/scripts
-          echo "PATH is ${PATH}"
-          NEW_PATH=$PATH:$(pwd)
-          echo "NEW_PATH is ${NEW_PATH}"
-          echo "::set-env name=PATH::${NEW_PATH}"
-          echo "PATH is ${PATH}"
+          echo "::set-env name=PATH::${PATH}:$(pwd)"
           chmod +x *
 
-
-      - name: The scripts are
-        run: |
-          cd .github/scripts
-          ls
-
       - name: For Non Master Branch make sure version file is not modified
-        run: ci-assertVersionIsModified "origin/${{ github.base_ref }}" "${GITHUB_SHA}"
+        run: ci-assertVersionIsNotModified "origin/${{ github.base_ref }}" "${GITHUB_SHA}"
 
       - name: Github Sha
         run: echo $GITHUB_SHA
