@@ -30,6 +30,7 @@ jobs:
           NEW_PATH="${PATH}:$(pwd)"
           echo "NEW_PATH is ${NEW_PATH}"
           echo "::set-env name=PATH::${NEW_PATH}"
+          echo "PATH is ${PATH}"
           chmod +x *
 
       - name: For Non Master Branch make sure version file is not modified
