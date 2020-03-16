@@ -3,8 +3,8 @@
 INITIAL_VERSION_NUM=${1}
 MODIFIED_VERSION_NUM=${2}
 
-INITIAL_MAJOR_VERSION=$(ci-extractVersion major ${INITIAL_MAJOR_VERSION}) || exit 1
-INITIAL_MINOR_VERSION=$(ci-extractVersion minor ${INITIAL_MAJOR_VERSION}) || exit 1
+INITIAL_MAJOR_VERSION=$(ci-extractVersion major ${INITIAL_VERSION_NUM}) || exit 1
+INITIAL_MINOR_VERSION=$(ci-extractVersion minor ${INITIAL_VERSION_NUM}) || exit 1
 
 MODIFIED_MAJOR_VERSION=$(ci-extractVersion major ${MODIFIED_VERSION_NUM}) || exit 1
 MODIFIED_MINOR_VERSION=$(ci-extractVersion minor ${MODIFIED_VERSION_NUM}) || exit 1
