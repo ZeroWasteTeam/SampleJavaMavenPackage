@@ -1,0 +1,18 @@
+#!/bin/bash
+
+BASE_VESION=$1
+MODIFIED_VERSION=$2
+
+NUMBER_OF_VERSION_MODIFIED=$(git diff --name-only "${BASE_VESION}..${MODIFIED_VERSION}" version.txt | wc -l )
+if [[ "$NUMBER_OF_VERSION_MODIFIED" -eq 1 ]] ;
+then
+  NUMBER_OF_FILES_MODIFIED=$(git diff --name-only "${BASE_VESION}..${MODIFIED_VERSION}" | wc -l )
+  if [[ "$NUMBER_OF_FILES_MODIFIED" -gt 1 ]] ;
+  then  
+    echo "While modifying verion.txt, no other change is allowed" >&2
+    exit 1
+  fi
+fi
+
+
+
