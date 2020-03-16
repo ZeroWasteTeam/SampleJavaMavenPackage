@@ -19,6 +19,9 @@ jobs:
         with:
           java-version: 1.8
           
+      - name: Printing PATH
+        run: echo "PATH is ${PATH}"
+          
       - name: Making Custom Scripts As Executable
         run: |
           cd .github/scripts
