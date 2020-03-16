@@ -25,6 +25,7 @@ jobs:
       - name: Making Custom Scripts As Executable
         run: |
           cd .github/scripts
+          echo "PATH is ${PATH}"
           NEW_PATH="${PATH}:$(pwd)"
           echo "NEW_PATH is ${NEW_PATH}"
           echo "::set-env name=PATH::${NEW_PATH}"
