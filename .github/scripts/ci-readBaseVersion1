@@ -2,7 +2,8 @@
 
 exitWithError() {
   local MESSAGE=$1
-  { echo >&2 "${MESSAGE}"; exit 1; }
+  echo >&2 "${MESSAGE}";
+  exit 1;
 }
 
 readBaseVersion() {
