@@ -25,6 +25,9 @@ jobs:
           echo "::set-env name=PATH::${PATH}:$(pwd)"
           chmod +x *
 
+      - name: For Non Master Branch make sure version file is not modified
+        run: ci-assertVersionIsModified "origin/${{ github.base_ref }}" "${GITHUB_SHA}"
+
       - name: Github Sha
         run: echo $GITHUB_SHA
 
