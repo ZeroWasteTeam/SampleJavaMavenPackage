@@ -33,6 +33,12 @@ jobs:
           echo "PATH is ${PATH}"
           chmod +x *
 
+
+      - name: The scripts are
+        run: |
+        cd .github/scripts
+        ls
+
       - name: For Non Master Branch make sure version file is not modified
         run: ci-assertVersionIsModified "origin/${{ github.base_ref }}" "${GITHUB_SHA}"
 
