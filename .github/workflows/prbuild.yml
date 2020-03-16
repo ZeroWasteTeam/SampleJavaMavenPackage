@@ -33,31 +33,19 @@ jobs:
         if: github.base_ref == 'master'
         run: ci-assertVersioningRulesFollowed "origin/${{ github.base_ref }}" "${GITHUB_SHA}"
 
-      - name: Github Sha
-        run: echo $GITHUB_SHA
+      - name: Extract Base Version
+        if: github.base_ref == 'master'
+        run: echo "::set-env name=CI_BASE_VERSION::$(ci-readBaseVersion1 origin/${{ github.base_ref }})"
 
-      - name: Github ref
-        run: echo $GITHUB_REF
-        
-      - name: Head ref
-        run: echo ${{ github.head_ref }}
-        
-      - name: Base ref
-        run: echo ${{ github.base_ref }}
-        
-      - name: myStuff:txt
-        run: git show "${GITHUB_SHA}:myStuff.txt"
-        
-        
-      - name: myStuff:txt
-        run: git show "origin/${{ github.base_ref }}:myStuff.txt"
+      - name: Extract Modfied Version
+        if: github.base_ref == 'master'
+        run: echo "::set-env name=CI_MODIFIED_VERSION::$(ci-readBaseVersion1 ${GITHUB_SHA})"
 
-      #If master branch and if version file is modified. Make sure nothing is modified
-      
-      #if release branch make sure not version file is not modified
-      
-      #If master and version file  is modified make sure the version is correctly changed
-      
+      - name: Check Version increment checkout@v1
+        if: github.base_ref == 'master'
+        run: ci-assertVersionIsEqualOrIncremented "${CI_BASE_VERSION} ${CI_MODIFIED_VERSION}"
+
+        #check if we need to say version increment is not allowed in the branch
       
       - name: PR - Gradle Build
         run: gradle build
