@@ -43,7 +43,7 @@ jobs:
 
       - name: Verify version modification rules
         if: github.base_ref == 'master'
-        run: ci-assertVersionIsEqualOrIncremented "${CI_BASE_VERSION} ${CI_MODIFIED_VERSION}"
+        run: ci-assertVersionIsEqualOrIncremented "${CI_BASE_VERSION}" "${CI_MODIFIED_VERSION}"
 
         #check if we need to say version increment is not allowed in the branch
       
