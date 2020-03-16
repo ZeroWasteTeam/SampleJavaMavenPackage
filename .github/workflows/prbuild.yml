@@ -29,6 +29,10 @@ jobs:
         if: github.base_ref != 'master'
         run: ci-assertVersionIsNotModified "origin/${{ github.base_ref }}" "${GITHUB_SHA}"
 
+      - name: For Master Branch verify version modification constraint
+        if: github.base_ref == 'master'
+        run: ci-assertVersioningRulesFollowed "origin/${{ github.base_ref }}" "${GITHUB_SHA}"
+
       - name: Github Sha
         run: echo $GITHUB_SHA
 
