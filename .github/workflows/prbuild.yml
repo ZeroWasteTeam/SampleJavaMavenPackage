@@ -36,7 +36,13 @@ jobs:
         
       - name: Base ref
         run: echo ${{ github.base_ref }}
-      
+        
+      - name: myStuff:txt
+        run: git show "${GITHUB_SHA}:myStuff.txt"
+        
+        
+      - name: myStuff:txt
+        run: git show "origin/${{ github.base_ref }}:myStuff.txt"
 
       #If master branch and if version file is modified. Make sure nothing is modified
       
