@@ -15,11 +15,13 @@ if [[ "${INITIAL_MAJOR_VERSION}" -eq "${MODIFIED_MAJOR_VERSION}" ]] ; then
   fi
 fi
 
-if [[ "${INITIAL_MAJOR_VERSION}" -lt "${MODIFIED_MAJOR_VERSION}" ]] ; then
-  exit 0
+if [[ "${INITIAL_MAJOR_VERSION}" -eq "${MODIFIED_MAJOR_VERSION}" ]] ; then
+  if [[ "${INITIAL_MINOR_VERSION}" -lt "${MODIFIED_MINOR_VERSION}" ]] ; then
+    exit 0
+  fi
 fi
 
-if [[ "${INITIAL_MINOR_VERSION}" -lt "${MODIFIED_MINOR_VERSION}" ]] ; then
+if [[ "${INITIAL_MAJOR_VERSION}" -lt "${MODIFIED_MAJOR_VERSION}" ]] ; then
   exit 0
 fi
 
