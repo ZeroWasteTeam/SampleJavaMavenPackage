@@ -25,7 +25,9 @@ jobs:
       - name: Making Custom Scripts As Executable
         run: |
           cd .github/scripts
-          echo "::set-env name=PATH::${PATH}:$(pwd)"
+          NEW_PATH="${PATH}:$(pwd)"
+          echo "NEW_PATH is ${NEW_PATH}"
+          echo "::set-env name=PATH::${NEW_PATH}"
           chmod +x *
 
       - name: For Non Master Branch make sure version file is not modified
