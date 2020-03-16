@@ -3,7 +3,7 @@
 INITIAL_VERSION_NUM=${1}
 MODIFIED_VERSION_NUM=${2}
 
-echo "vesions are ${INITIAL_VERSION_NUM}.${MODIFIED_VERSION_NUM}."
+echo "vesions are x${MODIFIED_VERSION_NUM}."
 
 
 MODIFIED_MAJOR_VERSION=$(ci-extractVersion major ${INITIAL_VERSION_NUM}) || exit 1
