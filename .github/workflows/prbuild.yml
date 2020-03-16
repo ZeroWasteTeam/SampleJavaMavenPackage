@@ -41,7 +41,7 @@ jobs:
         if: github.base_ref == 'master'
         run: echo "::set-env name=CI_MODIFIED_VERSION::$(ci-readBaseVersion1 ${GITHUB_SHA})"
 
-      - name: Check Version increment checkout@v1
+      - name: Verify version modification rules
         if: github.base_ref == 'master'
         run: ci-assertVersionIsEqualOrIncremented "${CI_BASE_VERSION} ${CI_MODIFIED_VERSION}"
 
