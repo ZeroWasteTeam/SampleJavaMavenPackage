@@ -37,7 +37,8 @@ publishing {
             //groupId 'com.zerowasteteam'
             //artifactId 'sample-maven'
             //artifactId 'sample-java-maven-package' //when not given the project name
-			version = project.findProperty("gpr.version")?: '0.0.1'
+			artifactId 'sample-java-maven'
+            version = project.findProperty("gpr.version")?: '0.0.1'
             from(components.java)
         }
 
