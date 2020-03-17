@@ -8,7 +8,7 @@ on:
 jobs:
 
   build-and-test:
-    name: PR - Build and Test
+    name: Java PR Build
     runs-on: ubuntu-18.04
 
     steps:
@@ -44,8 +44,6 @@ jobs:
       - name: Verify version modification rules
         if: github.base_ref == 'master'
         run: ci-assertVersionIsEqualOrIncremented "${CI_BASE_VERSION}" "${CI_MODIFIED_VERSION}"
-
-        #check if we need to say version increment is not allowed in the branch
       
       - name: PR - Gradle Build
         run: gradle build
