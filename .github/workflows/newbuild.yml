@@ -42,7 +42,7 @@ jobs:
         id: compute-release-version
         uses: ZeroWasteTeam/action-read-base-version@convertion
         with:
-          current-branch: "${CI_BUILD_BRANCH}"
+          current-branch: ${CI_BUILD_BRANCH}
           
       - name: Gradle Build
         run: gradle build
