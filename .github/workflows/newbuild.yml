@@ -1,4 +1,4 @@
-name: Maven Package Release Build
+name: New Build
 
 on:
   repository_dispatch:
