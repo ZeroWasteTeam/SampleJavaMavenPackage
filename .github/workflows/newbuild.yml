@@ -41,6 +41,8 @@ jobs:
       - name: Get Release Version
         id: compute-release-version
         uses: ZeroWasteTeam/action-read-base-version@convertion
+        with:
+          current-branch: ${BUILD_BRANCH}
           
       - name: Gradle Build
         run: gradle build
