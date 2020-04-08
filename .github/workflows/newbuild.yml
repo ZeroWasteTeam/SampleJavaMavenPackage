@@ -50,6 +50,5 @@ jobs:
       - name: Unit Test
         run: gradle test
 
-
       - name: Gradle Publish
         run: gradle -Pgpr.repo="https://maven.pkg.github.com/ZeroWasteTeam/SampleJavaMavenPackage" -Pgpr.user="${{ github.actor }}" -Pgpr.key="${{ secrets.GITHUB_TOKEN }}" -Pgpr.version="${{ steps.compute-release-version.outputs.version}}" publish
