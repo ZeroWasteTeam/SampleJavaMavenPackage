@@ -13,5 +13,6 @@ jobs:
     name: Build Test Version Publish
     runs-on: ubuntu-18.04
 
+
     steps:
       - uses: ZeroWasteTeam/action-read-base-version@master
