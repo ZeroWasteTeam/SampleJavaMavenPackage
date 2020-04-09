@@ -20,7 +20,7 @@ jobs:
         with:
           java-version: 1.8
 
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v1
     
       - uses: ZeroWasteTeam/action-prepare-workspace@master
         id: prepare-ws
