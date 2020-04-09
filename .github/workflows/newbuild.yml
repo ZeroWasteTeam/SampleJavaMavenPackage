@@ -21,28 +21,16 @@ jobs:
         with:
           java-version: 1.8
 
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
     
-      - name: If Repository Dispatch Checkout Sha
-        if: github.event_name == 'repository_dispatch'
-        run: git checkout -f "${{  github.event.client_payload.buildSha }}"
-        
-      - name:  Set build branch
-        run: |
-          set -e
-          if [[ ${{ github.event_name }} = 'repository_dispatch' ]] ;
-          then
-            BUILD_BRANCH="${{  github.event.client_payload.buildBranch }}"            
-          else
-            BUILD_BRANCH="${GITHUB_REF#refs/heads/}"
-          fi
-          echo "::set-env name=CI_BUILD_BRANCH::${BUILD_BRANCH}"
+      - uses: ZeroWasteTeam/action-prepare-workspace@master
+        id: prepare-ws
 
       - name: Get Release Version
         id: compute-release-version
         uses: ZeroWasteTeam/action-compute-version@convertion
         with:
-          current-branch: ${{env.CI_BUILD_BRANCH}}
+          current-branch: ${{steps.prepare-ws.outputs.build-branch }}
 
       - name: Gradle Build
         run: gradle build
