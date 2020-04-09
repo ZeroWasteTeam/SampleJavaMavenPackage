@@ -40,7 +40,7 @@ jobs:
 
       - name: Get Release Version
         id: compute-release-version
-        uses: ZeroWasteTeam/action-read-base-version@convertion
+        uses: ZeroWasteTeam/action-compute-version@convertion
         with:
           current-branch: ${{env.CI_BUILD_BRANCH}}
 
