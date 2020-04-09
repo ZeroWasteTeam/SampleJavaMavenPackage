@@ -43,7 +43,7 @@ jobs:
         uses: ZeroWasteTeam/action-read-base-version@convertion
         with:
           current-branch: ${{env.CI_BUILD_BRANCH}}
-          
+
       - name: Gradle Build
         run: gradle build
           
