@@ -10,7 +10,8 @@ on:
       - 'master'
       - 'release*'
 
-jobs:
+jobs: 
+
 
   build-test-version-publish:
     name: New Build
