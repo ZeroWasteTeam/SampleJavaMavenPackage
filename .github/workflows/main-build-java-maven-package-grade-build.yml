@@ -24,7 +24,7 @@ jobs:
         id: compute-release-version
         uses: ZeroWasteTeam/action-compute-version@convertion
         with:
-          current-branch:  '${{ github.ref }} 
+          current-branch:  '${{ github.ref }}'
           
       - name: Gradle Build
         run: gradle build
@@ -34,3 +34,4 @@ jobs:
 
       - name: Gradle Publish
         run: gradle -Pgpr.repo="https://maven.pkg.github.com/ZeroWasteTeam/SampleJavaMavenPackage" -Pgpr.user="${{ github.actor }}" -Pgpr.key="${{ secrets.GITHUB_TOKEN }}" -Pgpr.version="${{ steps.compute-release-version.outputs.version}}" publish
+
