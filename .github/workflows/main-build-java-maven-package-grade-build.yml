@@ -24,8 +24,8 @@ jobs:
         id: compute-release-version
         uses: ZeroWasteTeam/action-compute-version@convertion
         with:
-          current-branch: ${{ GITHUB_REF#refs/heads/ }}
-
+          current-branch: ${ GITHUB_REF#refs/heads/ }
+          
       - name: Gradle Build
         run: gradle build
           
