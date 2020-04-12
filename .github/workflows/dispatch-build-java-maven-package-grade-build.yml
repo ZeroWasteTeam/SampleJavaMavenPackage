@@ -5,7 +5,7 @@ on:
 
 jobs: 
   repository-dispatch-build:
-    name: New Build
+    name: Repository Dispatch Build
     runs-on: ubuntu-18.04
 
     steps:
