@@ -20,11 +20,15 @@ jobs:
 
       - uses: actions/checkout@v1
     
+      - name: Extract branch name
+        run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+        id: extract_branch
+    
       - name: Get Release Version
         id: compute-release-version
         uses: ZeroWasteTeam/action-compute-version@convertion
         with:
-          current-branch:  '${{ github.ref/refs/ }}'
+          current-branch:  ${{ steps.extract_branch.outputs.branch }}
           
       - name: Gradle Build
         run: gradle build
