@@ -1,19 +1,10 @@
-name: New Build
-
+name: Repository Dispatch Build
 
 on:
   repository_dispatch:
 
-
-  push:
-    branches:
-      - 'master'
-      - 'release*'
-
 jobs: 
-
-
-  build-test-version-publish:
+  repository-dispatch-build:
     name: New Build
     runs-on: ubuntu-18.04
 
@@ -25,14 +16,14 @@ jobs:
 
       - uses: actions/checkout@v1
     
-      - uses: ZeroWasteTeam/action-prepare-workspace@master
-        id: prepare-ws
-
+      - name: If Repository Dispatch Checkout Sha
+        run: git checkout -f "${{  github.event.client_payload.buildSha }}"    
+    
       - name: Get Release Version
         id: compute-release-version
         uses: ZeroWasteTeam/action-compute-version@convertion
         with:
-          current-branch: ${{steps.prepare-ws.outputs.build-branch }}
+          current-branch: ${{ github.event.client_payload.buildBranch }}
 
       - name: Gradle Build
         run: gradle build
