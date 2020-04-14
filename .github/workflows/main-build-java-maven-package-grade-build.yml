@@ -22,7 +22,7 @@ jobs:
     
       - name: Get Release Version
         id: compute-release-version
-        uses: ZeroWasteTeam/actions/compute-version@master
+        uses: ZeroWasteTeam/actions/compute-version@v1
         with:
           current-branch:  ${{ github.ref }}
 
