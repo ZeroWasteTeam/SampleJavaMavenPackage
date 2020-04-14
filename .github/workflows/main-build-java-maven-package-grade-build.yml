@@ -5,7 +5,7 @@ on:
   push:
     branches:
       - 'master'
-      #- 'rel-*' // This is not needed for maven package build. This is needed for docker builds (release flow)
+      - 'rel-*' # This is not needed for maven package build. This is needed for docker builds (release flow)
 
 jobs: 
   master-build:
