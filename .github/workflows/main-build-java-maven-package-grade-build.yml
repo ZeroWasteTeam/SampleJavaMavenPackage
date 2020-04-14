@@ -5,7 +5,7 @@ on:
   push:
     branches:
       - 'master'
-      - 'rel-*'
+      #- 'rel-*' // This is not needed for maven package build. This is needed for docker builds (release flow)
 
 jobs: 
   master-build:
@@ -25,6 +25,7 @@ jobs:
         uses: ZeroWasteTeam/actions/compute-version@master
         with:
           build-branch:  ${{ github.ref }}
+          is-release-flow: false # This line is not needed for docker build. For docker build the value has to be true (which is the default) value
 
       - name: Gradle Build
         run: gradle build

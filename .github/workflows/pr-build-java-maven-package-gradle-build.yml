@@ -4,7 +4,7 @@ on:
   pull_request:
     branches:
       - 'master'
-      - 'rel-*'
+      #- 'rel-*' This line is not needed for Maven build. It is needed for Docker builds (release flow)
 jobs:
   pr-build:
     name: PR Build

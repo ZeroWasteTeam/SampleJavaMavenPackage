@@ -24,6 +24,7 @@ jobs:
         uses: ZeroWasteTeam/actions/compute-version@master
         with:
           build-branch: ${{ github.event.client_payload.buildBranch }}
+          is-release-flow: false # This line is not needed for docker build. For docker build the value has to be true (which is the default) value
 
       - name: Gradle Build
         run: gradle build
