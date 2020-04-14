@@ -24,10 +24,10 @@ jobs:
           base-branch:  ${{ github.base_ref }} 
           merged-ref: ${{ github.sha }} 
       
-      - name: PR - Gradle Build
+      - name: Gradle Build
         run: gradle build
         
-      - name: PR - Gradle Test
+      - name: Gradle Test
         run: gradle test
 
       
