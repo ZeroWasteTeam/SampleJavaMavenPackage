@@ -6,7 +6,7 @@ on:
       - 'master'
       - 'rel-*'
 jobs:
-  PR Build:
+  pr-build:
     name: PR Build
     runs-on: ubuntu-18.04
 
