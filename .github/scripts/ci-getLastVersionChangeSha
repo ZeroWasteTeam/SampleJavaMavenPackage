@@ -1,7 +1,0 @@
-#!/bin/bash
-
-set -e
-GIT_SHA=$(git log  -n 1 --format=format:%H version.txt)
-echo ${GIT_SHA}
-
-
