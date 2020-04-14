@@ -27,7 +27,7 @@ jobs:
 
       - name: Get Release Version1
         id: compute-release-version1
-        uses: ZeroWasteTeam/actions/verify-pr-version@convertion
+        uses: ZeroWasteTeam/actions/verify-pr-version@master
         with:
           base-branch:  ${{ github.base_ref }} 
           merged-ref: ${{ github.sha }} 
