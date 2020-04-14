@@ -19,7 +19,7 @@ jobs:
           java-version: 1.8
 
       - name: Validating versioning
-        uses: ZeroWasteTeam/actions/verify-pr-version@v1
+        uses: ZeroWasteTeam/actions/verify-pr-version@master
         with:
           base-branch:  ${{ github.base_ref }} 
           merged-ref: ${{ github.sha }} 

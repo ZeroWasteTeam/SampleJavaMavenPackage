@@ -21,9 +21,9 @@ jobs:
     
       - name: Get Release Version
         id: compute-release-version
-        uses: ZeroWasteTeam/actions/compute-version@v1
+        uses: ZeroWasteTeam/actions/compute-version@master
         with:
-          current-branch: ${{ github.event.client_payload.buildBranch }}
+          build-branch: ${{ github.event.client_payload.buildBranch }}
 
       - name: Gradle Build
         run: gradle build
