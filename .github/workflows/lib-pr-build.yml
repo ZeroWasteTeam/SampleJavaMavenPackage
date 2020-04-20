@@ -24,10 +24,13 @@ jobs:
           base-branch:  ${{ github.base_ref }} 
           merged-ref: ${{ github.sha }} 
       
-      - name: Gradle Build
-        run: gradle build
-        
-      - name: Gradle Test
-        run: gradle test
+      - name: Enable Scripts
+        run: chmod +x ./scripts-*.sh
+
+      - name: Build Script
+        run: ./scripts-build.sh ${{ github.actor }} ${{ secrets.GITHUB_TOKEN }} 
+          
+      - name: Test Script
+        run: ./scripts-test.sh
 
       

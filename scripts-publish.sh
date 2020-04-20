@@ -1,4 +1,8 @@
 #!/bin/bash
 
-gradle -Pgpr.repo="https://maven.pkg.github.com/${1}" -Pgpr.user="${2}" -Pgpr.key="${3}" -Pgpr.version="${4}" publish
+REPO=${1}
+USERNAME=${2}
+PASSWORD=${3}
+
+./gradlew -Pgpr.repo="https://maven.pkg.github.com/${REPO}" -Pgpr.user="${USERNAME}" -Pgpr.key="${PASSWORD}" -Pgpr.version="${4}" publish
 

@@ -1,15 +1,11 @@
-name: Master Build
-
+name: Repository Dispatch Build
 
 on:
-  push:
-    branches:
-      - 'master'
-      - 'rel-*' # This is not needed for maven package build. This is needed for docker builds (release flow)
+  repository_dispatch:
 
 jobs: 
-  master-build:
-    name: Master Build
+  repository-dispatch-build:
+    name: Repository Dispatch Build
     runs-on: ubuntu-18.04
 
     steps:
@@ -19,25 +15,25 @@ jobs:
           java-version: 1.8
 
       - uses: actions/checkout@v1
+
+      - name: Checkout triggered sha
+        run: git checkout -f "${{  github.event.client_payload.buildSha }}"
     
       - name: Get Release Version
         id: compute-release-version
         uses: ZeroWasteTeam/actions/compute-version@master
         with:
-          build-branch:  ${{ github.ref }}
+          build-branch: ${{ github.event.client_payload.buildBranch }}
           is-release-flow: false # This line is not needed for docker build. For docker build the value has to be true (which is the default) value
 
       - name: Enable Scripts
         run: chmod +x ./scripts-*.sh
 
-      - name: Gradle Build
-        run: gradle -Pbuild.user="${{ github.actor }}" -Pbuild.password="${{ secrets.GITHUB_TOKEN }}" build 
+      - name: Build Script
+        run: ./scripts-build.sh ${{ github.actor }} ${{ secrets.GITHUB_TOKEN }} 
           
-      - name: Unit Test
-        run: gradle test
+      - name: Test Script
+        run: ./scripts-test.sh
 
       - name: Publish Script
         run: ./scripts-publish.sh ${{ github.repository }} ${{ github.actor }} ${{ secrets.GITHUB_TOKEN }} ${{ steps.compute-release-version.outputs.version}}
-
-
-
