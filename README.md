@@ -10,4 +10,6 @@ This is an example project for a java libraray. This project demonstrates buildi
 
 # Consuming the maven packages
 
+# Things to be ignored while version controlling
+
 # To Do
