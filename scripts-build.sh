@@ -3,5 +3,5 @@
 USERNAME=${1}
 PASSWORD=${2}
 
-chomod +x ./gradlew
+chmod +x ./gradlew
 ./gradlew -Pbuild.user="${USERNAME}" -Pbuild.password="${PASSWORD}" build
