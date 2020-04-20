@@ -38,7 +38,8 @@ jobs:
         
       - name: Publish Script
         run: |
-          chmod +x ./scripts-*.sh ${{ secrets.GITHUB_TOKEN }}
-          ./scripts-publish.sh
+          chmod +x ./scripts-*.sh
+          ./scripts-publish.sh ${{ secrets.GITHUB_TOKEN }}
+
 
 
