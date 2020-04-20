@@ -27,19 +27,17 @@ jobs:
           build-branch:  ${{ github.ref }}
           is-release-flow: false # This line is not needed for docker build. For docker build the value has to be true (which is the default) value
 
+      - name: Enable Scripts
+        run: chmod +x ./scripts-*.sh
+
       - name: Gradle Build
         run: gradle build
           
       - name: Unit Test
         run: gradle test
 
- #     - name: Gradle Publish
- #       run: gradle -Pgpr.repo="https://maven.pkg.github.com/ZeroWasteTeam/SampleJavaMavenPackage" -Pgpr.user="${{ github.actor }}" -Pgpr.key="${{ secrets.GITHUB_TOKEN }}" -Pgpr.version="${{ steps.compute-release-version.outputs.version}}" publish
-        
       - name: Publish Script
-        run: |
-          chmod +x ./scripts-*.sh
-          ./scripts-publish.sh ${{ github.actor }} ${{ secrets.GITHUB_TOKEN }} ${{ steps.compute-release-version.outputs.version}}
+        run: ./scripts-publish.sh ${{ github.actor }} ${{ secrets.GITHUB_TOKEN }} ${{ steps.compute-release-version.outputs.version}}
 
 
 
