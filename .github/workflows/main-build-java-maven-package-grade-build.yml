@@ -31,13 +31,13 @@ jobs:
         run: chmod +x ./scripts-*.sh
 
       - name: Gradle Build
-        run: gradle build
+        run: gradle -Pbuild.user="${{ github.actor }}" -Pbuild.password="${{ secrets.GITHUB_TOKEN }}" build 
           
       - name: Unit Test
         run: gradle test
 
       - name: Publish Script
-        run: ./scripts-publish.sh ${{ github.actor }} ${{ secrets.GITHUB_TOKEN }} ${{ steps.compute-release-version.outputs.version}}
+        run: ./scripts-publish.sh ${{ github.repository }} ${{ github.actor }} ${{ secrets.GITHUB_TOKEN }} ${{ steps.compute-release-version.outputs.version}}
 
 
 
